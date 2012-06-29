@@ -1,11 +1,10 @@
 #coding:utf-8
-import csv
-from pelicula import Pelicula
-
 class BuscadorPeliculas(object):
-	def __init__(self):
-		self._peliculas = {}
-		self._importar_peliculas_csv("../peliculas.csv")
+	def __init__(self, peliculas_repo):
+		""" Recibe un parámetro peliculas_repo que contiene un método
+			obtener_peliculas, que devuelve un diccionario de peliculas.
+		"""
+		self._peliculas = peliculas_repo.obtener_peliculas()
 		
 		
 	def obtener_peliculas_titulo_comienza(self, titulo):
@@ -68,21 +67,3 @@ class BuscadorPeliculas(object):
 			if director in pelicula.director:
 				lista.append(pelicula)
 		return lista
-		
-		
-		
-
-	def _importar_peliculas_csv(self, path):
-		""" Recibe un path correspondiente a un archivo csv, con valores delimitados por ;
-			e importa todas las películas en dicho archivo.
-		"""
-		with open(path) as archivo:
-			reader = csv.reader(archivo, delimiter= ";")
-			
-			for line in reader:
-				self._agregar_registro(line)
-
-	def _agregar_registro(self, lista):
-		""" Añade a la base una pelicula a partir de una lista de valores.
-		"""
-		self._peliculas[lista[0]] = Pelicula(lista[0], int(lista[1]), lista[2], lista[3].split(','), lista[4])
