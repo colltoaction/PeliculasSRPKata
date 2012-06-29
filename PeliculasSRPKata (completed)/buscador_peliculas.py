@@ -5,7 +5,7 @@ from pelicula import Pelicula
 class BuscadorPeliculas(object):
 	def __init__(self):
 		self._peliculas = {}
-		self._importar_peliculas_csv("peliculas.csv")
+		self._importar_peliculas_csv("../peliculas.csv")
 		
 		
 	def obtener_peliculas_titulo_comienza(self, titulo):
